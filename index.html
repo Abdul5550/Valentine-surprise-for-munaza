@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Munaza â¤ï¸ Mohaiman</title>
+<style>
+    :root {
+        --primary: #800020;
+        --secondary: #ff3366;
+        --gold: #d4af37;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+        background: radial-gradient(circle at center, #4a0000 0%, #1a0000 100%);
+        overflow: hidden;
+        text-align: center;
+        color: white;
+    }
+
+    .stars {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: url('https://www.transparenttextures.com/patterns/stardust.png');
+        opacity: 0.3;
+        z-index: 0;
+    }
+
+    #passwordScreen {
+        position: fixed;
+        width: 100%; height: 100vh;
+        background: rgba(26, 0, 0, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        transition: 1s;
+    }
+
+    input {
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid var(--gold);
+        background: rgba(255,255,255,0.1);
+        color: white;
+        font-size: 18px;
+        margin-bottom: 15px;
+        outline: none;
+        width: 220px;
+        text-align: center;
+    }
+
+    button {
+        padding: 12px 30px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    #unlockBtn {
+        background: var(--gold);
+        color: black;
+        box-shadow: 0 0 15px var(--gold);
+    }
+
+    #mainContent {
+        display: none;
+        position: relative;
+        z-index: 5;
+        height: 100vh;
+        overflow-y: auto;
+        padding-top: 50px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        color: var(--gold);
+        text-shadow: 0 0 10px rgba(212,175,55,0.5);
+    }
+
+    .container {
+        margin-top: 50px;
+        height: 150px;
+        position: relative;
+    }
+
+    #yesBtn {
+        background: white;
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin-right: 20px;
+    }
+
+    #noBtn {
+        background: var(--secondary);
+        color: white;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .letter {
+        display: none;
+        background: rgba(255,255,255,0.95);
+        color: #222;
+        padding: 40px;
+        border-radius: 5px;
+        width: 85%;
+        max-width: 500px;
+        margin: 40px auto;
+        line-height: 1.8;
+        border: 2px solid var(--gold);
+    }
+
+    @media (max-width:600px){
+        .letter{
+            width:92%;
+            padding:25px;
+            font-size:1.05rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div id="passwordScreen">
+    <h2 style="color:var(--gold)">Our Private Chapter ðŸ’•</h2>
+    <p>Enter our special date to begin</p>
+    <input type="password" id="passwordInput" placeholder="DD-MM-YYYY">
+    <button id="unlockBtn" onclick="checkPassword()">Unlock the Magic ðŸ’–</button>
+    <p id="error" style="color:red"></p>
+</div>
+
+<div id="mainContent">
+    <h1>Munaza â¤ï¸</h1>
+    <p>FROM MOHAIMAN, MY FOREVER</p>
+
+    <div class="container" id="btnContainer">
+        <h2>Will You Be My Valentine?</h2>
+        <button id="yesBtn" onclick="showLove()">YES ðŸ’–</button>
+        <button id="noBtn" onmouseover="moveNoBtn()">NO ðŸ˜¢</button>
+    </div>
+
+    <div class="letter" id="loveLetter">
+        <h2 style="color:var(--primary)">My Dearest Munaza ðŸ’•</h2>
+        <p>
+            From the day <strong>20-6-2024</strong> came into our lives, everything changed for me.<br><br>
+            You became my reason to smile randomly, my calm during chaos, and my favorite notification.<br><br>
+            This is about <strong>forever</strong>.<br><br>
+            Always yours,<br>
+            <strong>Mohaiman â¤ï¸</strong>
+        </p>
+        <button onclick="bombBlast()" style="margin-top:20px;background:var(--secondary);color:white;">
+            ðŸ’£ One Last Surprise
+        </button>
+    </div>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/07/audio_4f0a2a2e1e.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="blastMusic">
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_8c8b0e7a53.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function checkPassword(){
+    if(passwordInput.value==="20-6-2024"){
+        bgMusic.play();
+        passwordScreen.style.display="none";
+        mainContent.style.display="block";
+    } else {
+        error.innerText="That's not our date ðŸ˜¢";
+    }
+}
+
+function showLove(){
+    loveLetter.style.display="block";
+    btnContainer.style.display="none";
+}
+
+function bombBlast(){
+    loveLetter.style.display="none";
+    bgMusic.pause();
+    blastMusic.play();
+    if(navigator.vibrate) navigator.vibrate([200,100,200]);
+
+    const bomb=document.createElement("div");
+    bomb.innerHTML="ðŸ’£";
+    bomb.style.position="fixed";
+    bomb.style.left="50%";
+    bomb.style.top="50%";
+    bomb.style.fontSize="70px";
+    bomb.style.transform="translate(-50%,-50%)";
+    document.body.appendChild(bomb);
+
+    setTimeout(()=>{
+        bomb.remove();
+        for(let i=0;i<60;i++){
+            const kiss=document.createElement("div");
+            kiss.innerHTML="ðŸ’‹";
+            kiss.style.position="fixed";
+            kiss.style.left="50%";
+            kiss.style.top="50%";
+            kiss.style.transition="1.6s";
+            document.body.appendChild(kiss);
+            const x=(Math.random()-0.5)*innerWidth;
+            const y=(Math.random()-0.5)*innerHeight;
+            setTimeout(()=>{
+                kiss.style.transform=`translate(${x}px,${y}px) scale(2)`;
+                kiss.style.opacity=0;
+            },10);
+            setTimeout(()=>kiss.remove(),1700);
+        }
+    },900);
+}
+
+function moveNoBtn(){
+    noBtn.style.left=Math.random()*80+"%";
+    noBtn.style.top=Math.random()*80+"%";
+}
+</script>
+
+</body>
+  </html>
